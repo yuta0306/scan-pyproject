@@ -93,7 +93,7 @@ ORDER BY `{unit.lower()}` DESC
         truncation: bool = True,
         num: int = 30,
         unit: str = "DAY",
-    ) -> int | dict[str, int]:
+    ) -> dict[str, int]:
         query = PIP_COUNT.format_map({"project": project, "num": num, "unit": unit})
         if truncation:
             query = re.sub(
@@ -121,7 +121,7 @@ ORDER BY `{unit.lower()}` DESC
 
         for row in results:
             pass
-        return int(row.num_downloads)
+        return {"downloads": int(row.num_downloads)}
 
     def fetch_pip(self, project: str, num: int = 30, unit: str = "DAY") -> list[Row]:
         query_job = self.client.query(

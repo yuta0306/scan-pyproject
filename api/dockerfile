@@ -10,6 +10,11 @@ WORKDIR /home/api
 RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash
 RUN echo 'source "$HOME/.rye/env"' >> ~/.bashrc
 
-RUN git clone https://github.com/yuta0306/scan-pyproject
+RUN git clone https://github.com/yuta0306/scan-pyproject && cd scan-pyproject && git checkout 1-base-api
+
+COPY ./credentials.json /home/api/credentials.json
+
+WORKDIR /home/api/scan-pyproject
+RUN bash -c "/home/api/.rye/shims/rye sync"
 
 CMD [ "/bin/bash" ]

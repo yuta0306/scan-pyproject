@@ -1,0 +1,12 @@
+version: '3'
+volumes:
+  .venv:
+services:
+  app:
+    build:
+      context: api
+      dockerfile: dockerfile
+    working_dir: /home/api/scan-pyproject
+    command: /home/api/.rye/shims/rye sync -f && /home/api/.rye/shims/rye run uvicorn api.app:app
+    ports:
+      - "8000:8000"

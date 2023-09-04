@@ -8,7 +8,16 @@ services:
       dockerfile: dockerfile
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /home/api/credentials.json
-    working_dir: /home/api/scan-pyproject
     command: /home/api/.rye/shims/rye run uvicorn app:app --port=8000 --host=0.0.0.0
     ports:
       - "8000:8000"
+  frontend:
+    build:
+      context: frontend
+      dockerfile: dockerfile
+    restart: always
+    command: npm run build
+    environment:
+      - PORT=3333
+    ports:
+      - "3333:3333"

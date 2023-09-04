@@ -1,0 +1,19 @@
+FROM ubuntu:22.04
+
+RUN addgroup frontend && useradd -g frontend frontend
+RUN apt update
+RUN apt install -y nodejs npm curl
+RUN npm -g install n
+RUN n stable
+RUN apt purge -y nodejs npm
+RUN apt autoremove -y
+
+USER frontend
+WORKDIR /home/frontend
+
+COPY --chown=frontend:frontend . /home/frontend/app
+
+WORKDIR /home/frontend/app
+RUN npm ci
+
+CMD [ "/bin/bash" ]

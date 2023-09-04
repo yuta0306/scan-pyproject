@@ -1,8 +1,7 @@
 import os
 
-from fastapi import FastAPI
-
 from core import BigQuery, GitHub
+from fastapi import FastAPI
 
 app = FastAPI()
 bigquery = BigQuery()

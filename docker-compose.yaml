@@ -9,6 +9,6 @@ services:
     environment:
       GOOGLE_APPLICATION_CREDENTIALS: /home/api/credentials.json
     working_dir: /home/api/scan-pyproject
-    command: /home/api/.rye/shims/rye run uvicorn api.app:app --port=8000 --host=0.0.0.0
+    command: /home/api/.rye/shims/rye run uvicorn app:app --port=8000 --host=0.0.0.0
     ports:
       - "8000:8000"
